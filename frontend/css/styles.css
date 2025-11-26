@@ -136,3 +136,71 @@ textarea {
     font-size: 1.2em;
     cursor: pointer;
 }
+
+/* styles for log in pop-up */
+
+.loginTextH1 {
+    display: flex;
+    align-self: center;
+}
+#Log-In {
+     background-color: #ffffff;
+    width: 650px;
+    border-radius: 15px;
+    padding: 40px;
+    border-width: 10px;
+    border-color: #000000;
+    border-style: solid;
+    margin-bottom: 20px;
+}
+.formcontainer {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+#Log-In label {
+
+    font-size: 25px;
+    padding: 15px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+#uname, #psword {
+
+    display: flex;
+    border: #000000;
+    border-radius: 5px;
+    width: 350px;
+    height: 40px;
+    font-size: 25px;
+    margin: 10px;
+    justify-items:center;
+}
+
+#blanks {
+
+    text-align: center;
+
+}
+#submit {
+
+    width: 150px;
+    height: 30px;
+    font-size: 20px;
+    background-color: #7e7e7e;
+    border: none;
+    text-align: center;
+    margin-top: 15px;
+    border-radius: 5px;
+    
+}
+.error-msg {
+color: red;
+font-size: 0.9em;
+margin-top: 2px;
+margin-bottom: 10px;
+display: block;
+}
