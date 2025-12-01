@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     updateNavBar(); // from auth.js
     loadCourses();
+    setupFilters();
 });
 
 // Store all courses globally for search use
@@ -91,6 +92,32 @@ function renderCourses(courses) {
 
         container.appendChild(card);
     });
+}
+
+// Filters Functionality
+function setupFilters() {
+    const subjectFilter = document.getElementById("subjectFilter");
+    const creditFilter = document.getElementById("creditFilter");
+
+    subjectFilter.addEventListener("change", applyFilters);
+    creditFilter.addEventListener("change", applyFilters);
+}
+
+function applyFilters() {
+    const subject = document.getElementById("subjectFilter").value;
+    const credits = document.getElementById("creditFilter").value;
+    
+    let filtered = allCourses.filter(course => {
+        const matchesSubject = 
+            subject === "" || course.subject === subject;
+
+        const matchesCredits = 
+            credits === "" || course.credits.toString() === credits;
+
+        return matchesSubject && matchesCredits;
+    });
+
+    renderCourses(filtered);
 }
 
 // SEARCH FUNCTIONALITY

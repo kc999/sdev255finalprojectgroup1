@@ -49,6 +49,10 @@ nav h1 {
 .search {
     text-align: center;
     margin: 20px 0 40px;
+    border-radius: 12px;
+    padding: 30px;
+    border: 2px solid #587B7F;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3)
 }
 
 .search__input {
@@ -83,7 +87,45 @@ nav h1 {
     height: 1.2em;
 }
 
-/* ---------------- COURSE CATALOG LAYOUT ---------------- */
+/* FILTER BAR STYLES */
+.filters {
+    display: flex;
+    gap: 15px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 900px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Inputs + dropdowns */
+.filters input,
+.filters select {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background: #F0F6F6;
+    transition: 0.2s ease;
+    min-width: 180px;
+    color:grey;
+}
+
+/* Focus effect */
+.filters input:focus,
+.filters select:focus {
+    box-shadow: 0 0 4px rgba(0, 0, 0, .05);
+    outline: none;
+}
+
+/* Hover */
+.filters select:hover,
+.filters input:hover {
+    background-color: #f4f9f9;
+}
+
+
+/* COURSE CATALOG LAYOUT */
 .catalog-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
