@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;600;700&display=swap');
+
+body {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: "Roboto Condensed", sans-serif;
+    color: #011936;
+}
+
+/* ---------------- NAV ---------------- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    text-transform: uppercase;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav li {
+    list-style: none;
+    
+}
+
+nav li i {
+    color: #587B7F;
+    font-size: 1.2em;
+}
+
+nav a {
+    color: #587B7F;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+nav h1 {
+    font-size: 2em;
+}
+
+/* ---------------- SEARCH BAR ---------------- */
+.search {
+    text-align: center;
+    margin: 20px 0 40px;
+}
+
+.search__input {
+    font-family: inherit;
+    font-size: 1.1rem;
+    background-color: #F0F6F6;
+    border: none;
+    color: #587B7F;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    width: 45em;
+    height: 40px;
+    transition: 0.3s ease;
+}
+
+.search__input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #587B7F;
+}
+
+.search__button {
+    border: none;
+    background: transparent;
+    position: relative;
+    right: 45px;
+    top: 3px;
+    cursor: pointer;
+}
+
+.search__icon {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/* ---------------- COURSE CATALOG LAYOUT ---------------- */
+.catalog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.course-card {
+    background: #F0F6F6;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 6px solid #587B7F;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 10px;
+}
+
+.course-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.course-card p {
+    margin-bottom: 8px;
+}
+
+.add-btn {
+    padding: 8px 15px;
+    background: #587B7F;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+
+.add-btn:hover {
+    background: #425b5e;
+}
+
+/* ---------------- LOGIN FORM ---------------- */
+.formcontainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.form-title {
+    text-align: center;
+    margin-top: auto;
+}
+
+#Log-In {
+    background: #fff;
+    width: 450px;
+    border-radius: 12px;
+    padding: 30px;
+    border: 2px solid #587B7F;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+#Log-In h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#Log-In label {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+#uname,
+#psword {
+    width: 100%;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #587B7F;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+}
+
+#submit {
+    width: 100%;
+    height: 40px;
+    background-color: #587B7F;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+}
+
+#submit:hover {
+    background-color: #425b5e;
+}
+
+.error-msg {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* ------------ CART PAGE ------------ */
+
+.emptyMessage {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.3rem;
+    color: #587B7F;
+}
+
+.remove-btn {
+    padding: 8px 15px;
+    background: #a94442;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.remove-btn:hover {
+    background: #7a2d2b;
+}
