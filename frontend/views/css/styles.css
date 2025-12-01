@@ -124,7 +124,7 @@ nav h1 {
     background: #425b5e;
 }
 
-/* ---------------- LOGIN FORM ---------------- */
+/* ---------------- LOGIN FORM ---------------- 
 .formcontainer {
     display: flex;
     justify-content: center;
@@ -185,6 +185,7 @@ nav h1 {
     color: red;
     margin-bottom: 10px;
 }
+*/
 
 /* ------------ CART PAGE ------------ */
 
