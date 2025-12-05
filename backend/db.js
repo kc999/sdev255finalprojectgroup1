@@ -1,4 +1,6 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://sdev255group1:sdev255group1final1@sdev255final.xan5nhh.mongodb.net/?appName=sdev255final");
+const mongoURL = process.env.MONGO_INFO
+mongoose.connect(mongoURL);
 
 module.exports = mongoose;
