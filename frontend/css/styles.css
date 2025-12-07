@@ -132,7 +132,7 @@ h3 {
 
 /* styles for log in pop-up */
 
-.loginTextH1 {
+header, .loginTextH1 {
     display: flex;
     align-self: center;
 }
