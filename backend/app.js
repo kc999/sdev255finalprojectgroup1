@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./db');
 const express = require('express');
 var cors = require('cors');
 const jwt = require('jwt-simple');
@@ -70,9 +71,10 @@ router.put("/courses/:id", async(req,res) => {
 })
 router.delete("/courses/:id", async(req, res)=>{
     try{
-        const course = req.body;
-        await Courses.deleteOne({_id: req.params.id}, course)
-        console.log(course)
+        const delId = req.params.id
+        //const course = req.body;
+        await Courses.deleteOne({_id: req.params.id})
+        console.log(delId)
         res.sendStatus(200)
     }
     catch(err)
