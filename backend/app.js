@@ -117,6 +117,11 @@ router.post("/auth", async(req,res) =>{
 })
 
 
+//POST REGISTER
+
+
+///WIP
+
 
 
 
