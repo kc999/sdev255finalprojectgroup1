@@ -14,13 +14,17 @@ function updateNavBar() {
         loginLink.style.display = "block";
         userInfo.style.display = "none";
     }
+
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const logoutBtn = document.getElementById("logout-btn");
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
-            localStorage.removeItem("user");
+            localStorage.removeItem("user")
+            //added line below in case we use token instead of user for tracking authentication in the future, can be removed if not
+            localStorage.removeItem("token")
             window.location.reload();
         });
     }

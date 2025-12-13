@@ -30,12 +30,14 @@ async function login(username, password){
         const tokenResponse = await response.json()
         console.log(tokenResponse)
 
-        //save token
+        //save token and values
+        //the JSON data for user must be converted to a string, as localStorage only accepts one (key,value) pair
+        userInfo = JSON.stringify(tokenResponse)
+        localStorage.setItem("user", userInfo)
+        // can store a token if we want to separate authorization from user existence/values
         localStorage.setItem("token", tokenResponse.token)
-        localStorage.setItem("username", tokenResponse.username)
-        localStorage.setItem("isLoggedIn", "true")
 
-        //redirect
+        //redirects to home after login
         window.location.replace("index.html")
     } else {
         document.querySelector("errorMsg").innerHTML = "Bad username or password"

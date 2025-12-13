@@ -96,16 +96,13 @@ router.post("/auth", async(req,res) =>{
             //check to see if user password matches request password
             if(bcrypt.compareSync(req.body.password, user.password)){
                 // successful login
-                // creates a token encoded with the jwt library and sends back the user... this will be important later
-                // we also will send back as part of the token that you are currently authorized
-
+                // creates a token encoded with the jwt library and sends back the user
                 const token = jwt.encode({username: user.username}, secret)
-                //const auth = 1
                 res.json({
                     token: token, 
+                    name: user.name,
                     username: user.username, 
-                    userID: user._id
-                    //auth:auth
+                    role: user.role
                 })
             } else {
                 res.status(401).json({error: "Bad Password"})
@@ -118,10 +115,30 @@ router.post("/auth", async(req,res) =>{
 
 
 //POST REGISTER
+// added to populate database for testing purposes
+// creating a new user
+// router.post("/user", async(req,res) =>{
+//     if(!req.body.name || !req.body.username || !req.body.password || !req.body.role){
+//         res.status(400).json({error: "Missing necessary value"})
+//     }
 
+//     //create hash for password encryption
+//     const hash = bcrypt.hashSync(req.body.password, 10);
+//     const newUser = await new User({
+//         name: req.body.name,
+//         username: req.body.username,
+//         password: hash,
+//         role: req.body.role
+//     })
 
-///WIP
-
+//     try{
+//         await newUser.save()
+//         res.sendStatus(201) //success 
+//         console.log(newUser)
+//     } catch(err){
+//         res.status(400).send(err.message)
+//     }
+// })
 
 
 
