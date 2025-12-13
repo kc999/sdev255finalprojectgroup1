@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 var cors = require('cors');
 const jwt = require('jwt-simple');
+const bcrypt = require('bcryptjs')
 const Courses = require('./models/courses');
 const User = require('./models/users');
 const app = express();
