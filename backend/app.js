@@ -1,8 +1,9 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+var cors = require('cors');
+const jwt = require('jwt-simple');
 const Courses = require('./models/courses');
-const User = require('./models/users')
+const User = require('./models/users');
 const app = express();
 app.use(cors());
 app.use(express.json());
