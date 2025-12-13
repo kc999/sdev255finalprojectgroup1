@@ -1,5 +1,7 @@
 let token
 
+
+//this queryselector only works if the script in login.html is deferred, please keep in mind!
 document.querySelector("#loginBtn").addEventListener("click", async function(){
     //grab our data from the form
     const username = document.querySelector("#uname").value
