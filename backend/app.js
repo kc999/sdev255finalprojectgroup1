@@ -6,8 +6,11 @@ const bcrypt = require('bcryptjs')
 const Courses = require('./models/courses');
 const User = require('./models/users');
 const app = express();
-app.use(cors());
 app.use(express.json());
+app.use(cors());
+//secret for bcryptjs
+secret = "sdev255"
+
 const router = express.Router();
 
 const mongoURL = process.env.MONGO_INFO
@@ -82,7 +85,7 @@ router.delete("/courses/:id", async(req, res)=>{
 // USER INTERACTIONS
 
 //POST login
-router.post("/auth", async(req,res) =>{
+router.post("/login", async(req,res) =>{
     if(!req.body.username || !req.body.password){
         res.status(401).json({error: "Missing username or password"})
         return
@@ -114,31 +117,31 @@ router.post("/auth", async(req,res) =>{
 })
 
 
-//POST REGISTER
+// // POST REGISTER
 // added to populate database for testing purposes
 // creating a new user
-// router.post("/user", async(req,res) =>{
-//     if(!req.body.name || !req.body.username || !req.body.password || !req.body.role){
-//         res.status(400).json({error: "Missing necessary value"})
-//     }
+router.post("/register", async(req,res) =>{
+    if(!req.body.name || !req.body.username || !req.body.password || !req.body.role){
+        res.status(400).json({error: "Missing necessary value"})
+    }
 
-//     //create hash for password encryption
-//     const hash = bcrypt.hashSync(req.body.password, 10);
-//     const newUser = await new User({
-//         name: req.body.name,
-//         username: req.body.username,
-//         password: hash,
-//         role: req.body.role
-//     })
+    //create hash for password encryption
+    const hash = bcrypt.hashSync(req.body.password, 10);
+    const newUser = await new User({
+        name: req.body.name,
+        username: req.body.username,
+        password: hash,
+        role: req.body.role
+    })
 
-//     try{
-//         await newUser.save()
-//         res.sendStatus(201) //success 
-//         console.log(newUser)
-//     } catch(err){
-//         res.status(400).send(err.message)
-//     }
-// })
+    try{
+        await newUser.save()
+        res.sendStatus(201) //success 
+        console.log(newUser)
+    } catch(err){
+        res.status(400).send(err.message)
+    }
+})
 
 
 

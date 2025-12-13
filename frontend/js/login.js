@@ -1,22 +1,14 @@
-let token
-
-
-//this queryselector only works if the script in login.html is deferred, please keep in mind!
-document.querySelector("#loginBtn").addEventListener("click", async function(){
-    //grab our data from the form
-    const username = document.querySelector("#uname").value
-    const password = document.querySelector("#psword").value
-
-    login(username,password)
-
+addEventListener("DOMContentLoaded", function(){
+    document.querySelector("#loginBtn").addEventListener("click", login);
 })
 
 
-async function login(username, password){
-    // Remove any previous error message
-    document.querySelector(".error").innerHTML = "";
-    
-    const response = await fetch("http://localhost:3000/api/auth",{
+async function login(){
+    const username = document.querySelector("#uname").value
+    const password = document.querySelector("#psword").value
+    console.log(username)
+
+    const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers:{
             "Content-Type" : "application/json"
@@ -25,6 +17,8 @@ async function login(username, password){
             "username": username,
             "password": password
         })
+
+        
     })
 
     if(response.ok){
@@ -42,6 +36,8 @@ async function login(username, password){
         //redirects to home after login
         window.location.replace("index.html")
     } else {
-        document.querySelector("errorMsg").innerHTML = "Bad username or password"
+        console.log("oops")
     }
 }
+
+
