@@ -12,6 +12,7 @@ const router = express.Router();
 
 const mongoURL = process.env.MONGO_INFO
 
+// COURSE INTERACTIONS
 //Grab all course
 router.get("/courses", async(req,res)=>{
     try{
@@ -51,8 +52,8 @@ router.get("/courses/:id", async(req, res) =>{
 })
 //Update is to update existing record
 router.put("/courses/:id", async(req,res) => {
-    //First find the song that needs to be updated
-    //Request id of song from request, and then find and update it
+    //First find the course that needs to be updated
+    //Request id of course from request, and then find and update it
     try{
         const course = req.body
         await Courses.updateOne({_id : req.params.id}, course)
@@ -76,6 +77,53 @@ router.delete("/courses/:id", async(req, res)=>{
         res.status(400).send(err)
     }
 })
+
+
+// USER INTERACTIONS
+
+//POST login
+router.post("/auth", async(req,res) =>{
+    if(!req.body.username || !req.body.password){
+        res.status(401).json({error: "Missing username or password"})
+        return
+    }
+    // try to find username in database, then see if it matches with username and password
+    try{
+        const user = await User.findOne({username: req.body.username})
+        if(!user) {
+            res.status(401).json({error:"Bad Username"})
+        } else {
+            //check to see if user password matches request password
+            if(bcrypt.compareSync(req.body.password, user.password)){
+                // successful login
+                // creates a token encoded with the jwt library and sends back the user... this will be important later
+                // we also will send back as part of the token that you are currently authorized
+
+                const token = jwt.encode({username: user.username}, secret)
+                //const auth = 1
+                res.json({
+                    token: token, 
+                    username: user.username, 
+                    userID: user._id
+                    //auth:auth
+                })
+            } else {
+                res.status(401).json({error: "Bad Password"})
+            }
+        }
+    } catch(err){
+        res.status(400).send(err.message)
+    }
+})
+
+
+
+
+
+
+
+
+
 app.use("/api",router)
 app.listen(3000, ()=> {
     console.log("Listening on port 3000");
