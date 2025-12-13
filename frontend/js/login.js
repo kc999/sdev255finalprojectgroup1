@@ -3,11 +3,13 @@ addEventListener("DOMContentLoaded", function(){
 })
 
 
-async function login(){
+async function login(e){
+    e.preventDefault()
     const username = document.querySelector("#uname").value
     const password = document.querySelector("#psword").value
     console.log(username)
-
+    try
+    {
     const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers:{
@@ -20,7 +22,7 @@ async function login(){
 
         
     })
-
+    
     if(response.ok){
         // take the token and save it to storage
         const tokenResponse = await response.json()
@@ -35,8 +37,15 @@ async function login(){
 
         //redirects to home after login
         window.location.replace("index.html")
-    } else {
+    } 
+    else 
+    {
         console.log("oops")
+    }
+    }
+    catch(error)
+    {
+        console.log(error)
     }
 }
 
