@@ -1,5 +1,6 @@
 // Load selected courses from backend or LocalStorage
 document.addEventListener("DOMContentLoaded", loadCart);
+updateNavBar() //from auth.js
 
 function loadCart() {
     // When backend is implemented:

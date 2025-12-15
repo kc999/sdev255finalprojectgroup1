@@ -1,5 +1,25 @@
 addEventListener("DOMContentLoaded", async function(){
-    document.querySelector("#editBtn").addEventListener("click", updateCourse)
+    updateNavBar() //from auth.js
+
+    //complicated section to check user role, need to tidy up but typeError if trying to access localStorage while not logged in
+    let isTeacher = false
+    //have to check if localStorage for user is not null before parsing as JSON and checking for value
+    if (localStorage.getItem("user") != null){
+        //parse as JSON and checking for value == Teacher
+        if (JSON.parse(localStorage.getItem("user")).role = "Teacher"){
+            isTeacher = true
+        }
+        // if (JSON.parse(localStorage("user")).role
+    }
+    if (isTeacher == false) {
+        this.alert("Only a Teacher can edit courses.\nYou can continue in read-only mode.")
+        document.querySelector("#editBtn").style.display="none"
+        document.querySelector("#deleteBtn").style.display="none"
+    }
+
+
+
+    document.querySelector("#editBtn").addEventListener("click", updateCourse);
     document.querySelector("#deleteBtn").addEventListener("click", deleteCourse);
     const urlParam = new URLSearchParams(window.location.search)
     const courseID = urlParam.get('id')
