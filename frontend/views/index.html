@@ -20,7 +20,7 @@
         </div>
     
         <ul id="nav-links">
-            <li><a href="index.html"><i class="fa-solid fa-circle-question"></i></a></li>
+            <button onclick="document.getElementById('id01').style.display='block'" class="help-button"><i class="fa-solid fa-circle-question"></i></button>
             <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
     
             <!-- Dynamic login/logout -->
@@ -31,7 +31,20 @@
                 <button id="logout-btn" class="logout-btn">Logout</button>
             </li>
         </ul>
+        
     </nav>
+
+    <!-- The Modal -->
+    <div id="id01" class="help-modal">
+        <div class="help-modal-content">
+            <div class="help-container">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class="help-button help-display-topright">&times;</span>
+                <p>Some text in the Modal..</p>
+                <p>Some text in the Modal..</p>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Search & Filter Selection -->
