@@ -101,8 +101,9 @@ router.post("/login", async(req,res) =>{
             //check to see if user password matches request password
             if(bcrypt.compareSync(req.body.password, user.password)){
                 // successful login
-                // creates a token encoded with the jwt library and sends with the user info
-                const token = jwt.encode({username: user.username}, secret)
+                // creates a token encoded with the jwt library
+                //sends other user info that is not private
+                const token = jwt.encode({username: user.username, role:user.role}, secret)
                 res.json({
                     token: token, 
                     name: user.name,
