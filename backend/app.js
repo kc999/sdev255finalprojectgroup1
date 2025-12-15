@@ -32,10 +32,20 @@ router.get("/courses", async(req,res)=>{
 //Add courses
 router.post("/courses", async(req,res)=>{
     try{
-        const course = await new Courses(req.body)
-        await course.save();
-        res.status(201).json(course)
-        //console.log(course);
+        //grabs encoded token from request
+        const token = req.body.token
+        //decodes token using jwt-simple, which yields the original {username:x, role:y} format
+        decoded = jwt.decode(token, secret).role
+        if (decoded == "Teacher"){
+            const course = await new Courses(req.body.course)
+            await course.save();
+            res.status(201).json(course)
+            //console.log(course);
+        } else {
+            //sends forbidden
+            res.status(403).json({error:"You are not a Teacher"})
+        }
+        
     }
     catch (err)
     {
@@ -59,10 +69,19 @@ router.put("/courses/:id", async(req,res) => {
     //First find the course that needs to be updated
     //Request id of course from request, and then find and update it
     try{
-        const course = req.body
-        await Courses.updateOne({_id : req.params.id}, course)
-        //console.log(course)
-        res.sendStatus(204)
+        //grabs encoded token from request
+        const token = req.body.token
+        //decodes token using jwt-simple, which yields the original {username:x, role:y} format
+        decoded = jwt.decode(token, secret).role
+        if (decoded == "Teacher"){
+            const course = req.body.course
+            await Courses.updateOne({_id : req.params.id}, course)
+            //console.log(course)
+            res.sendStatus(204)
+        } else {
+            //sends forbidden
+            res.status(403).json({error:"You are not a Teacher"})
+        }
     }
     catch (err)
     {

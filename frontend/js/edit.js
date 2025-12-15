@@ -47,12 +47,15 @@ addEventListener("DOMContentLoaded", async function(){
         subjectArea: document.querySelector("#subjectArea").value ? 
         document.querySelector("#subjectArea").value.split(",") : []
         }
+        //grabs user token to send back as well to verify credentials before updating course
+        const token = JSON.parse.localStorage.getItem("user").token
         const response = await fetch("http://localhost:3000/api/courses/" + courseID,{
             method: "PUT",
             headers: {
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify(course)
+            //sends course object and token object
+            body: JSON.stringify({course:course,token:token})
         })
         if (response.ok){
             alert("Updated Course")

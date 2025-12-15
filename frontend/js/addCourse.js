@@ -11,12 +11,14 @@ async function addCourse(){
         numberOfCredits: document.querySelector("#numberOfCredits").value
 
     }
+    //grabs user token to send back as well to verify credentials before updating course
+    const token = JSON.parse.localStorage.getItem("user").token
     const response = await fetch("http://localhost:3000/api/courses", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
     },
-    body: JSON.stringify(course)
+    body: JSON.stringify({course:course,token:token})
     })
     if (response.ok)
     {
