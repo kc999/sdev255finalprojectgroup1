@@ -10,6 +10,7 @@ async function login(e){
     console.log(username)
     try
     {
+    console.log("sending request")
     const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers:{
@@ -22,7 +23,6 @@ async function login(e){
 
         
     })
-    
     if(response.ok){
         // take the token and save it to storage
         const tokenResponse = await response.json()
@@ -35,12 +35,15 @@ async function login(e){
         // can store a token if we want to separate authorization from user existence/values
         localStorage.setItem("token", tokenResponse.token)
 
+        //Success message alert
+        alert("Login success, press OK to redirect to home")
         //redirects to home after login
         window.location.replace("index.html")
     } 
     else 
     {
-        console.log("oops")
+        console.log(response)
+        alert("Login Failed.")
     }
     }
     catch(error)

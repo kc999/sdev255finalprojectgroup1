@@ -140,9 +140,10 @@ searchInput.addEventListener("keyup", function () {
 // Add to schedule
 function addToSchedule(courseId) {
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user.role)
     if (!user) return window.location.href = "login.html";
 
-    if (user.role !== "student") {
+    if (user.role !== "Student") {
         alert("Only students can add courses to their schedule.");
         return;
     }

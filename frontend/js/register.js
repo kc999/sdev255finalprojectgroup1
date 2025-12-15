@@ -1,7 +1,7 @@
 addEventListener("DOMContentLoaded", function(){
     document.querySelector("#registerBtn").addEventListener("click", register);
+    document.querySelector("#deleteBtn").addEventListener("click", deleteUser);
 })
-
 
 async function register(){
     const response = await fetch("http://localhost:3000/api/register", {
@@ -25,3 +25,15 @@ async function register(){
     }
 }
 
+async function deleteUser(){
+    const username = document.querySelector("#username").value
+    const response = await fetch("http://localhost:3000/api/delete/" + username, {
+        method: "DELETE"
+    })
+    if (response.ok) {
+        alert("Deleted successfully")
+    }
+    else {
+        document.querySelector("#errorMsg").innerHTML = "Error trying to delete";
+    }
+}
