@@ -18,6 +18,7 @@ async function addCourse(){
     headers: {
         "Content-Type": "application/json"
     },
+    //sends course data and token
     body: JSON.stringify({course:course,token:token})
     })
     if (response.ok)
