@@ -45,6 +45,24 @@ nav h1 {
     font-size: 2em;
 }
 
+/* ---------------- HELP BUTTON --------------- */
+.help-button {
+    background-color: transparent;
+    border: none;
+    height: 50px;
+}
+
+.fa-circle-question {
+    font-size: 1.4em;
+    color: #587B7F;
+}
+
+.help-modal {
+    background-color: #587B7F;
+    color: #f4f9f9;
+    border-radius: 12px;
+}
+
 /* ---------------- SEARCH BAR ---------------- */
 .search {
     text-align: center;
@@ -131,6 +149,17 @@ nav h1 {
     grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
     gap: 25px;
     margin-top: 40px;
+}
+
+loginBody {
+    display: flex;
+    align-self: center;
+    vertical-align: middle;
+}
+
+header, .loginTextH1 {
+    display: flex;
+    align-self: center;
 }
 
 .course-card {
