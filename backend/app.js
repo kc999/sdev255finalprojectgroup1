@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 //secret for bcryptjs
-secret = "sdev255"
+secret = process.env.SECRET;
 
 const router = express.Router();
 
@@ -90,11 +90,22 @@ router.put("/courses/:id", async(req,res) => {
 })
 router.delete("/courses/:id", async(req, res)=>{
     try{
-        const delId = req.params.id
-        //const course = req.body;
-        await Courses.deleteOne({_id: req.params.id})
-        //console.log(delId)
-        res.sendStatus(200)
+        //Grab token from request
+        const token = req.body.token
+        //Decode token
+        decoded = jwt.decode(token,secret).role
+        if (decoded == "Teacher")
+        {
+            const delId = req.params.id
+            //const course = req.body;
+            await Courses.deleteOne({delId})
+            //console.log(delId)
+            res.sendStatus(200)
+        }
+        else {
+            //sends forbidden
+            res.status(403).json({error:"You are not a Teacher"})
+        }
     }
     catch(err)
     {
