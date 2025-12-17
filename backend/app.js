@@ -122,7 +122,7 @@ router.post("/login", async(req,res) =>{
                 // successful login
                 // creates a token encoded with the jwt library
                 //sends other user info that is not private
-                const token = jwt.encode({username: user.username, role:user.role}, secret)
+                const token = jwt.encode({username: user.username, role: user.role}, secret)
                 res.json({
                     token: token, 
                     name: user.name,

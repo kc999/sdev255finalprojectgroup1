@@ -15,23 +15,57 @@
     <nav>
         <div class="site-title">
             <a href="index.html">
-                <h1>Add a Course</h1>
+                <h1>Course Catalog</h1>
             </a>
         </div>
     
         <ul id="nav-links">
-            <li><a href="index.html"><i class="fa-solid fa-circle-question"></i></a></li>
+            <li><a class="popup-trigger"><i class="fa-solid fa-circle-question"></i></a></li>
+    
             <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
-            <li><a href="addcourse.html"><i class="fa-solid fa-plus"></i></a></li>
+            <li id="add-course-link" style="display:none;"><a href="addcourse.html"><i class="fa-solid fa-plus"></i></a>
+            </li>
+    
             <!-- Dynamic login/logout -->
             <li id="login-link"><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
     
             <li id="user-info" style="display:none;">
                 <span id="username-display"></span>
-                <button id="logout-btn" class="logout-btn">Logout</button>
+                <button id="logout-btn" class="logout-btn"><i class="fa-solid fa-right-to-bracket"></i></button>
             </li>
         </ul>
     </nav>
+    
+    <!-- Help Popup -->
+    <div class="hover-bkgr">
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">&times;</div>
+            <p>Text goes here...<br /> More text...</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const popupTrigger = document.querySelector(".popup-trigger");
+            const popupBg = document.querySelector(".hover-bkgr");
+            const closeBtn = document.querySelector(".popupCloseButton");
+
+            popupTrigger.addEventListener("click", () => {
+                popupBg.style.display = "flex";
+            });
+
+            popupBg.addEventListener("click", () => {
+                popupBg.style.display = "none";
+            });
+
+            closeBtn.addEventListener("click", (e) => {
+                e.stopPropagation(); // prevent background click
+                popupBg.style.display = "none";
+            });
+        });
+    </script>
+    
     <div class="courseformContainer">
     <form class="addcourseForm">
         <div>

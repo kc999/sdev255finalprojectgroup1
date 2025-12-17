@@ -119,25 +119,35 @@ nav h1 {
 }
 
 /* ---------------- SEARCH BAR ---------------- */
+.search-bar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 .search {
     text-align: center;
     margin: 20px 0 40px;
-    border-radius: 12px;
-    padding: 30px;
+    padding: 20px;
     border: 2px solid #587B7F;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3)
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    background: #fff;
 }
 
 .search__input {
-    font-family: inherit;
-    font-size: 1.1rem;
-    background-color: #F0F6F6;
-    border: none;
-    color: #587B7F;
+    flex-grow: 1; /* take available space */
     padding: 0.7rem 1rem;
     border-radius: 30px;
-    width: 45em;
-    height: 40px;
+    border: none;
+    background-color: #F0F6F6;
+    font-size: 1.1rem;
+    color: #587B7F;
+    height: 60px;
+    box-sizing: border-box;
     transition: 0.3s ease;
 }
 
@@ -149,15 +159,17 @@ nav h1 {
 .search__button {
     border: none;
     background: transparent;
-    position: relative;
-    right: 45px;
-    top: 3px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Search icon inside button */
 .search__icon {
     width: 1.2em;
     height: 1.2em;
+    color: #587B7F;
 }
 
 /* FILTER BAR STYLES */
@@ -313,7 +325,7 @@ nav h1 {
 
 .remove-btn {
     padding: 8px 15px;
-    background: #a94442;
+    background: #587B7F;
     color: white;
     border: none;
     border-radius: 6px;
@@ -322,7 +334,7 @@ nav h1 {
 }
 
 .remove-btn:hover {
-    background: #7a2d2b;
+    background: #425b5e;
 }
 /*--------- ADD A COURSE -------*/
 
@@ -381,40 +393,100 @@ nav h1 {
     margin-bottom: 10px;
 }
 
-/* Tablet (481x - 800px) */
-@media (min-width: 481px) and (max-width: 800px) {
-    body {
-        background-color: #fff;
-        font-size: 16px;
-    }
+/* EDIT & DELETE BUTTONS */
+.edit-btn,
+.delete-btn {
+    padding: 8px 15px;
+    background: #587B7F;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.2s;
+}
 
-    /* ---------------- SEARCH BAR ---------------- */
+.edit-btn:hover,
+.delete-btn:hover {
+    background: #425b5e;
+}
+
+/* EDIT COURSE PAGE */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#edit-course-form {
+    background: #fff;
+    width: 450px;
+    border-radius: 12px;
+    padding: 30px;
+    border: 2px solid #587B7F;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    display: block;
+    text-align: center;
+}
+
+#edit-course-form label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    margin: 5px;
+    padding-top: 15px;
+}
+
+#edit-course-form input, textarea {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.save-btn {
+    width: 50%;
+    height: 40px;
+    background-color: #587B7F;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+    margin-top: 20px;
+}
+
+.save-btn:hover {
+    background-color: #425b5e;
+}
+
+/* Tablet (481px - 800px) */
+@media (max-width: 800px) and (min-width: 481px) {
+    .search__input {
+        max-width: 80%;
+        /* shrink on smaller tablets */
+    }
+}
+
+/* Mobile (<=480px) */
+@media (max-width: 480px) {
+    .search-bar-wrapper {
+        flex-direction: column;
+        /* stack input and button */
+        align-items: stretch;
+        /* input takes full width */
+        padding: 15px;
+    }
 
     .search__input {
-        float: none;
-            display: block;
-            text-align: left;
-            width: 100%;
-            margin: 0;
-            padding: 14px;
-    }
-
-    .search__input:focus {
-        outline: none;
-        box-shadow: 0 0 10px #587B7F;
+        width: 100%;
+        max-width: none;
     }
 
     .search__button {
-        border: none;
-        background: transparent;
-        position: relative;
-        right: 45px;
-        top: 3px;
-        cursor: pointer;
-    }
-
-    .search__icon {
-        width: 1.2em;
-        height: 1.2em;
+        margin-top: 10px;
+        align-self: center;
+        /* center button below input */
     }
 }

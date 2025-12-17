@@ -6,7 +6,7 @@ const Courses = db.model("Courses",{
     coursePrefix: String,
     description: String,
     subjectArea: [String],
-    numberOfCredits:Number
+    numberOfCredits: Number
 })
 
 module.exports = Courses;

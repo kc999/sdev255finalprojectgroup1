@@ -1,3 +1,6 @@
+const currentUser = JSON.parse(localStorage.getItem("user"));
+const userRole = currentUser?.role;
+
 document.addEventListener("DOMContentLoaded", async () => {
     updateNavBar();
     await loadCourses();
@@ -35,13 +38,33 @@ function renderCourses(courses) {
         const card = document.createElement("div");
         card.classList.add("course-card");
 
+        let buttons = "";
+
+        // STUDENT buttons
+        if (userRole === "Student") {
+            buttons = `
+                <button class="add-btn" onclick="addToSchedule('${course._id}')">
+                    Add to Schedule
+                </button>
+            `;
+        }
+
+        // TEACHER buttons
+        if (userRole === "Teacher") {
+            buttons = `
+                <button class="edit-btn" onclick="editCourse('${course._id}')">
+                    Edit
+                </button>
+                <button class="delete-btn" onclick="deleteCourse('${course._id}')">
+                    Delete
+                </button>            `
+        }
+
         card.innerHTML = `
             <h3>${course.coursePrefix} ~ ${course.courseName}</h3>
             <p>${course.description}</p>
             <p><strong>Credits:</strong> ${course.numberOfCredits}</p>
-            <button class="add-btn" onclick="addToSchedule('${course._id}')">
-                Add to Schedule
-            </button>
+            ${buttons}
         `;
 
         container.appendChild(card);
@@ -115,25 +138,61 @@ function setUpSearch() {
 
 // Add to schedule
 function addToSchedule(courseId) {
+    console.log("Add clicked:", courseId);
+
     const user = JSON.parse(localStorage.getItem("user"));
-    if(!user) return window.location.href = "login.html";
-
-    if (user.role !== "student") {
-        alert("Only students can add courses to their schedule.");
+    if (!user) {
+        alert("Not logged in");
         return;
     }
 
-    const scheduleKey = "schedule_" + user.id;
-    const schedule = JSON.parse(localStorage.getItem(scheduleKey)) || [];
-
-    if (schedule.includes(courseId)) {
-        alert("Course is already in your schedule.");
+    if (user.role.toLowerCase() !== "student") {
+        alert("Only students can add courses.");
         return;
     }
 
-    schedule.push(courseId);
-    localStorage.setItem(scheduleKey, JSON.stringify(schedule));
+    const cartKey = `cart_${user.username}`;
+    const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
-    alert("Course add to your cart");
+    const course = allCourses.find(c => c._id === courseId);
+    if (!course) {
+        alert("Course not found");
+        return;
+    }
+
+    if (cart.some(c => c._id === courseId)) {
+        alert("Already added");
+        return;
+    }
+
+    cart.push(course);
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+
+    alert("Course added!");
 }
 
+
+function editCourse(courseId) {
+    window.location.href = `editcourse.html?id=${courseId}`;
+}
+
+async function deleteCourse(courseId) {
+    if (!confirm("Are you sure you want to delete this course?")) return;
+
+    try{
+        fetch(`/api/courses/${courseId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+
+    if (!response.ok) throw new Error("Failed to delete course");
+
+        alert("Course deleted!");
+        applyFilters(); // refresh list
+    } catch (error) {
+        console.error(error);
+        alert("Error deleting course");
+    }
+}

@@ -5,6 +5,8 @@ function updateNavBar() {
     const loginLink = document.getElementById("login-link");
     const userInfo = document.getElementById("user-info");
     const usernameDisplay = document.getElementById("username-display");
+    
+    const addCourseLink = document.getElementById("add-course-link");
 
     if (user) {
         loginLink.style.display = "none";
@@ -15,6 +17,11 @@ function updateNavBar() {
         userInfo.style.display = "none";
     }
 
+    if (user && user.role === "Teacher") {
+        addCourseLink.style.display = "block";
+    } else {
+        addCourseLink.style.display = "none";
+    }
 
 }
 
