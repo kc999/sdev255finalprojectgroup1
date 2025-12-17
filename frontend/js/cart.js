@@ -47,5 +47,6 @@ function removeFromCart(courseId) {
     cart = cart.filter(course => course._id !== courseId);
 
     localStorage.setItem(cartKey, JSON.stringify(cart));
+    alert("Course removed from cart successfully.")
     renderCart();
 }
