@@ -12,7 +12,7 @@ async function addCourse(){
 
     }
     //grabs user token to send back as well to verify credentials before updating course
-    const token = JSON.parse.localStorage.getItem("user").token
+    const token = JSON.parse(localStorage.getItem("user")).token
     const response = await fetch("http://localhost:3000/api/courses", {
     method: "POST",
     headers: {

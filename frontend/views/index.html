@@ -20,54 +20,77 @@
         </div>
     
         <ul id="nav-links">
-            <button onclick="document.getElementById('id01').style.display='block'" class="help-button"><i class="fa-solid fa-circle-question"></i></button>
+            <li><a class="popup-trigger"><i class="fa-solid fa-circle-question"></i></a></li>
+            
             <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
-            <li><a href="addcourse.html"><i class="fa-solid fa-plus"></i></a></li>
+            <li id="add-course-link" style="display:none;"><a href="addcourse.html"><i class="fa-solid fa-plus"></i></a></li>
+
             <!-- Dynamic login/logout -->
             <li id="login-link"><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
     
             <li id="user-info" style="display:none;">
                 <span id="username-display"></span>
-                <button id="logout-btn" class="logout-btn">Logout</button>
+                <button id="logout-btn" class="logout-btn"><i class="fa-solid fa-right-to-bracket"></i></button>
             </li>
         </ul>
         
     </nav>
 
-    <!-- The Modal -->
-    <div id="id01" class="help-modal">
-        <div class="help-modal-content">
-            <div class="help-container">
-                <span onclick="document.getElementById('id01').style.display='none'"
-                    class="help-button help-display-topright">&times;</span>
-                <p>Some text in the Modal..</p>
-                <p>Some text in the Modal..</p>
-            </div>
+    <!-- Help Popup -->
+    <div class="hover-bkgr">
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">&times;</div>
+            <p>Text goes here...<br/> More text...</p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const popupTrigger = document.querySelector(".popup-trigger");
+            const popupBg = document.querySelector(".hover-bkgr");
+            const closeBtn = document.querySelector(".popupCloseButton");
+
+            popupTrigger.addEventListener("click", () => {
+                popupBg.style.display = "flex";
+            });
+
+            popupBg.addEventListener("click", () => {
+                popupBg.style.display = "none";
+            });
+
+            closeBtn.addEventListener("click", (e) => {
+                e.stopPropagation(); // prevent background click
+                popupBg.style.display = "none";
+            });
+        });
+    </script>
 
 
     <!-- Search & Filter Selection -->
     <main>
+        
         <div class="search">
             <div class="search-title">
                 <h2>Search Courses</h2>
             </div>
-            <input type="text" class="search__input" placeholder="Keyword, Instructor, CRN, Subject ...">
-            <button class="search__button">
-                <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
-                    <g>
-                        <path
-                            d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                        </path>
-                    </g>
-                </svg>
-            </button>
+            
+            <div class="search-bar-wrapper">
+                <input type="text" class="search__input" placeholder="Keyword, Instructor, CRN, Subject ...">
+                <button class="search__button">
+                    <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                        <g>
+                            <path
+                                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                            </path>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+            
             <div class="filters">
                 <select id="subjectFilter">
                     <option value="">All Subjects</option>
-                    <option value="CSE">CSE</option>
-                    <option value="MAT">MAT</option>
                     <!-- Add more subjects here -->
                 </select>
 
@@ -83,17 +106,14 @@
     </main>
 
     <!-- Course Cards -->
-    <ul>
     <div id="courses-container" class="catalog-container">
         <!-- JavaScript will insert course cards here -->
         
     </div>
-    </ul>
 
 
     <script src="../js/auth.js"></script>
     <script src="../js/api.js"></script>
-    <script src="../js/catalog.js"></script>
 </body>
 
 </html>

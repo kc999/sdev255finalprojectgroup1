@@ -45,44 +45,109 @@ nav h1 {
     font-size: 2em;
 }
 
-/* ---------------- HELP BUTTON --------------- */
-.help-button {
+.logout-btn {
     background-color: transparent;
     border: none;
-    height: 50px;
+    cursor: pointer;
 }
 
-.fa-circle-question {
+.fa-right-to-bracket {
     font-size: 1.4em;
+}
+
+/* ---------------- HELP BUTTON --------------- */
+.hover-bkgr {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(209, 226, 227, 0.85);
+    z-index: 10000;
+
+    
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Popup Box */
+.hover-bkgr>div {
+    background-color: #fff;
+    border: 2px solid #587B7F;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 550px;
+    padding: 30px;
+    position: relative;
+    text-align: left;
+}
+
+/* Close Button */
+.popupCloseButton {
+    background-color: #F0F6F6;
+    border: 2px solid #587B7F;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 30px;
+    line-height: 26px;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    color: #425b5e;
+}
+
+.popupCloseButton:hover {
+    background-color: #587B7F;
+    color: #ffffff;
+}
+
+/* Help Icon */
+.popup-trigger {
+    cursor: pointer;
+    font-size: 1.2em;
     color: #587B7F;
 }
 
-.help-modal {
-    background-color: #587B7F;
-    color: #f4f9f9;
-    border-radius: 12px;
+.popup-trigger:hover {
+    color: #011936;
 }
 
 /* ---------------- SEARCH BAR ---------------- */
+.search-bar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 .search {
     text-align: center;
     margin: 20px 0 40px;
-    border-radius: 12px;
-    padding: 30px;
+    padding: 20px;
     border: 2px solid #587B7F;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3)
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    background: #fff;
 }
 
 .search__input {
-    font-family: inherit;
-    font-size: 1.1rem;
-    background-color: #F0F6F6;
-    border: none;
-    color: #587B7F;
+    flex-grow: 1; /* take available space */
     padding: 0.7rem 1rem;
     border-radius: 30px;
-    width: 45em;
-    height: 40px;
+    border: none;
+    background-color: #F0F6F6;
+    font-size: 1.1rem;
+    color: #587B7F;
+    height: 60px;
+    box-sizing: border-box;
     transition: 0.3s ease;
 }
 
@@ -94,15 +159,17 @@ nav h1 {
 .search__button {
     border: none;
     background: transparent;
-    position: relative;
-    right: 45px;
-    top: 3px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Search icon inside button */
 .search__icon {
     width: 1.2em;
     height: 1.2em;
+    color: #587B7F;
 }
 
 /* FILTER BAR STYLES */
@@ -195,7 +262,7 @@ header, .loginTextH1 {
     background: #425b5e;
 }
 
-/* ---------------- LOGIN FORM ----------------*/
+/* ---------------- LOGIN FORM ---------------- */
 .formcontainer {
     display: flex;
     justify-content: center;
@@ -269,7 +336,7 @@ header, .loginTextH1 {
 
 .remove-btn {
     padding: 8px 15px;
-    background: #a94442;
+    background: #587B7F;
     color: white;
     border: none;
     border-radius: 6px;
@@ -278,7 +345,7 @@ header, .loginTextH1 {
 }
 
 .remove-btn:hover {
-    background: #7a2d2b;
+    background: #425b5e;
 }
 /*--------- ADD A COURSE -------*/
 
@@ -335,4 +402,102 @@ header, .loginTextH1 {
 .error-msg {
     color: red;
     margin-bottom: 10px;
+}
+
+/* EDIT & DELETE BUTTONS */
+.edit-btn,
+.delete-btn {
+    padding: 8px 15px;
+    background: #587B7F;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    background: #425b5e;
+}
+
+/* EDIT COURSE PAGE */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#edit-course-form {
+    background: #fff;
+    width: 450px;
+    border-radius: 12px;
+    padding: 30px;
+    border: 2px solid #587B7F;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    display: block;
+    text-align: center;
+}
+
+#edit-course-form label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    margin: 5px;
+    padding-top: 15px;
+}
+
+#edit-course-form input, textarea {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.save-btn {
+    width: 50%;
+    height: 40px;
+    background-color: #587B7F;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+    margin-top: 20px;
+}
+
+.save-btn:hover {
+    background-color: #425b5e;
+}
+
+/* Tablet (481px - 800px) */
+@media (max-width: 800px) and (min-width: 481px) {
+    .search__input {
+        max-width: 80%;
+        /* shrink on smaller tablets */
+    }
+}
+
+/* Mobile (<=480px) */
+@media (max-width: 480px) {
+    .search-bar-wrapper {
+        flex-direction: column;
+        /* stack input and button */
+        align-items: stretch;
+        /* input takes full width */
+        padding: 15px;
+    }
+
+    .search__input {
+        width: 100%;
+        max-width: none;
+    }
+
+    .search__button {
+        margin-top: 10px;
+        align-self: center;
+        /* center button below input */
+    }
 }
