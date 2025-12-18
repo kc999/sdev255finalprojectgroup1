@@ -39,14 +39,33 @@ function renderCart() {
     });
 }
 
-function removeFromCart(courseId) {
+async function removeFromCart(courseId) {
     const user = JSON.parse(localStorage.getItem("user"));
     const cartKey = `cart_${user.username}`;
+    const token = user.token;
 
     let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
     cart = cart.filter(course => course._id !== courseId);
-
-    localStorage.setItem(cartKey, JSON.stringify(cart));
-    alert("Course removed from cart successfully.")
-    renderCart();
+    try {
+        //Remove course from database
+        const response = await fetch("http://localhost:3000/api/users/remove-course", {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                token: token,
+                course: courseId
+            })
+        });
+        if (response.ok)
+        {   
+            localStorage.setItem(cartKey, JSON.stringify(cart));
+            alert("Course removed from cart successfully.")
+            renderCart();
+        }
+    }
+    catch(err)
+    {
+        console.log(err)
+    }
+   
 }

@@ -137,7 +137,7 @@ function setUpSearch() {
 }
 
 // Add to schedule
-function addToSchedule(courseId) {
+async function addToSchedule(courseId) {
     console.log("Add clicked:", courseId);
 
     const user = JSON.parse(localStorage.getItem("user"));
@@ -153,8 +153,9 @@ function addToSchedule(courseId) {
 
     const cartKey = `cart_${user.username}`;
     const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
     const course = allCourses.find(c => c._id === courseId);
+    const token = user.token;
+
     if (!course) {
         alert("Course not found");
         return;
@@ -164,11 +165,30 @@ function addToSchedule(courseId) {
         alert("Already added");
         return;
     }
+    //Attempt to add the course to the user's database entry
+    else
+    {
+        try{
+            const response = await fetch("http://localhost:3000/api/users/add-course", {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    token: token,
+                    course: course
+                })
+            })
+                if (response.ok) {
+                cart.push(course);
+                localStorage.setItem(cartKey, JSON.stringify(cart));
 
-    cart.push(course);
-    localStorage.setItem(cartKey, JSON.stringify(cart));
-
-    alert("Course added!");
+                alert("Course added!");
+            }
+        }
+        catch(error)
+        {
+            console.log("error:", error)
+        }
+    }
 }
 
 
@@ -180,17 +200,23 @@ async function deleteCourse(courseId) {
     if (!confirm("Are you sure you want to delete this course?")) return;
 
     try{
-        fetch(`/api/courses/${courseId}`, {
+       const response = await fetch(`/api/courses/${courseId}`, {
         method: "DELETE",
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
     });
-
-    if (!response.ok) throw new Error("Failed to delete course");
-
+    
+    if (response.ok)
+    {
         alert("Course deleted!");
         applyFilters(); // refresh list
+    }
+    else
+    {
+        throw new Error("Failed to delete course");
+    }
+       
     } catch (error) {
         console.error(error);
         alert("Error deleting course");

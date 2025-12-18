@@ -88,6 +88,61 @@ router.put("/courses/:id", async(req,res) => {
         res.status(400).send(err)
     }
 })
+//Update a users course array in their database entry when a course is added to their schedukle
+router.put("/users/add-course", async (req, res) =>{
+    try {
+        const token = req.body.token;
+        const course = req.body.course;
+        console.log("Token received: ", req.body.token)
+        //Decode token to get user
+        const decoded = jwt.decode(token,secret);
+        console.log("Decoded token: ",decoded)
+        //Get user and push changes
+        const updateUser = await User.findOneAndUpdate(
+            {username: decoded.username},
+            {$push: {courses: course}},
+            {new: true}
+        );
+        //If the update fails, alert the user/server
+        if (!updateUser)
+        {
+            res.status(404).json({error: "User not found. Course not added"});
+        }
+        res.status(200).json({message: "Course added to user"});
+    }
+    catch (err){
+        res.status(400).send(err);
+    }
+
+})
+//Removes a course from student's course array
+//Update a users course array in their database entry when a course is added to their schedukle
+router.put("/users/remove-course", async (req, res) =>{
+    try {
+        const token = req.body.token;
+        const course = req.body.course;
+        console.log("Token received: ", req.body.token)
+        //Decode token to get user
+        const decoded = jwt.decode(token,secret);
+        console.log("Decoded token: ",decoded)
+        //Get user and push changes
+        const updateUser = await User.findOneAndUpdate(
+            {username: decoded.username},
+            { $pull: { courses: { _id: course } } },
+            {new: true}
+        );
+        //If the update fails, alert the user/server
+        if (!updateUser)
+        {
+            res.status(404).json({error: "User not found. Course removed"});
+        }
+        res.status(200).json({message: "Course removed"});
+    }
+    catch (err){
+        res.status(400).send(err);
+    }
+
+})
 router.delete("/courses/:id", async(req, res)=>{
     try{
         //Grab token from request
