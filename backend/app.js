@@ -93,10 +93,8 @@ router.put("/users/add-course", async (req, res) =>{
     try {
         const token = req.body.token;
         const course = req.body.course;
-        console.log("Token received: ", req.body.token)
         //Decode token to get user
         const decoded = jwt.decode(token,secret);
-        console.log("Decoded token: ",decoded)
         //Get user and push changes
         const updateUser = await User.findOneAndUpdate(
             {username: decoded.username},
@@ -121,10 +119,8 @@ router.put("/users/remove-course", async (req, res) =>{
     try {
         const token = req.body.token;
         const course = req.body.course;
-        console.log("Token received: ", req.body.token)
         //Decode token to get user
         const decoded = jwt.decode(token,secret);
-        console.log("Decoded token: ",decoded)
         //Get user and push changes
         const updateUser = await User.findOneAndUpdate(
             {username: decoded.username},
