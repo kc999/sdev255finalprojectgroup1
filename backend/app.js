@@ -22,7 +22,6 @@ router.get("/courses", async(req,res)=>{
     try{
         const courses = await Courses.find({})
         res.send(courses)
-        //console.log(courses)
     }
     catch (err)
     {
@@ -40,7 +39,6 @@ router.post("/courses", async(req,res)=>{
             const course = await new Courses(req.body.course)
             await course.save();
             res.status(201).json(course)
-            //console.log(course);
         } else {
             //sends forbidden
             res.status(403).json({error:"You are not a Teacher"})
@@ -76,7 +74,6 @@ router.put("/courses/:id", async(req,res) => {
         if (decoded == "Teacher"){
             const course = req.body.course
             await Courses.updateOne({_id : req.params.id}, course)
-            //console.log(course)
             res.sendStatus(204)
         } else {
             //sends forbidden
@@ -148,9 +145,7 @@ router.delete("/courses/:id", async(req, res)=>{
         if (decoded == "Teacher")
         {
             const delId = req.params.id
-            //const course = req.body;
             await Courses.deleteOne({delId})
-            //console.log(delId)
             res.sendStatus(200)
         }
         else {
@@ -191,7 +186,6 @@ router.post("/login", async(req,res) =>{
                     username: user.username, 
                     role: user.role
                 })
-                console.log(`Successfully responded with ${user}, ${token}`)
             } else {
                 res.status(401).json({error: "Bad Password"})
             }
@@ -200,52 +194,6 @@ router.post("/login", async(req,res) =>{
         res.status(400).send(err.message)
     }
 })
-
-
-// // POST REGISTER
-// added to populate database for testing purposes
-// creating a new user
-router.post("/register", async(req,res) =>{
-    if(!req.body.name || !req.body.username || !req.body.password || !req.body.role){
-        res.status(400).json({error: "Missing necessary value"})
-    }
-    //create hash for password encryption
-    const hash = bcrypt.hashSync(req.body.password, 10);
-    const newUser = await new User({
-        name: req.body.name,
-        username: req.body.username,
-        password: hash,
-        role: req.body.role
-    })
-    try{
-        await newUser.save()
-        res.sendStatus(201) //success 
-        console.log(newUser)
-    } catch(err){
-        res.status(400).send(err.message)
-    }
-})
-
-// DELETE
-// This is for deleting users from database and can be deleted before final project submission
-// router.delete("/delete/:username", async(req,res) =>{
-//     try{
-//         const deletedUser = await User.deleteOne({username: req.params.username})
-//         if (deletedUser.deletedCount === 0) {
-//             console.log('No documents matched query. Nothing was deleted.')
-//             res.sendStatus(404)
-//         } else {
-//             console.log('The document was deleted successfully')
-//             res.sendStatus(200)
-//         }
-//     } catch(err) {
-//         console.log(err)
-//         res.status(400).send(err)
-//     }
-
-// })
-
-
 
 
 app.use("/api",router)

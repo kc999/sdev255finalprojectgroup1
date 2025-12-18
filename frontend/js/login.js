@@ -7,10 +7,8 @@ async function login(e){
     e.preventDefault()
     const username = document.querySelector("#uname").value
     const password = document.querySelector("#psword").value
-    console.log(username)
     try
     {
-    console.log("sending request")
     const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers:{
@@ -26,7 +24,6 @@ async function login(e){
     if(response.ok){
         // take the token and save it to storage
         const tokenResponse = await response.json()
-        console.log(tokenResponse)
 
         //save token and values
         //the JSON data for user must be converted to a string, as localStorage only accepts one (key,value) pair
@@ -42,7 +39,6 @@ async function login(e){
     } 
     else 
     {
-        console.log(response)
         alert("Login Failed.")
     }
     }

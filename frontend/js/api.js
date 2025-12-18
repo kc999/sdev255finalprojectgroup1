@@ -138,7 +138,6 @@ function setUpSearch() {
 
 // Add to schedule
 async function addToSchedule(courseId) {
-    console.log("Add clicked:", courseId);
 
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
