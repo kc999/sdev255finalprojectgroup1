@@ -22,13 +22,14 @@ async function loadCourse() {
         document.querySelector("#numberOfCredits").value = course.numberOfCredits;
 }
 
-document.getElementById("edit-course-form").addEventListener("submit", async (e) => {
+document.querySelector("#edit-course-form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const updatedCourse = {
         coursePrefix: document.getElementById("coursePrefix").value,
         courseName: document.getElementById("courseName").value,
         description: document.getElementById("description").value,
+        subjectArea: document.getElementById("subjectArea").value,
         numberOfCredits: document.getElementById("numberOfCredits").value,
     };
 
