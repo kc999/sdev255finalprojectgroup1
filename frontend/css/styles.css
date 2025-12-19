@@ -218,6 +218,17 @@ nav h1 {
     margin-top: 40px;
 }
 
+loginBody {
+    display: flex;
+    align-self: center;
+    vertical-align: middle;
+}
+
+header, .loginTextH1 {
+    display: flex;
+    align-self: center;
+}
+
 .course-card {
     background: #F0F6F6;
     padding: 20px;
@@ -251,7 +262,7 @@ nav h1 {
     background: #425b5e;
 }
 
-/* ---------------- LOGIN FORM ----------------*/
+/* ---------------- LOGIN FORM ---------------- */
 .formcontainer {
     display: flex;
     justify-content: center;
