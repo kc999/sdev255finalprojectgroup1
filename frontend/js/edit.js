@@ -25,14 +25,23 @@ async function loadCourse() {
 document.getElementById("edit-course-form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    if (!courseId) {
+        alert("Course ID missing");
+        return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("You must be logged in");
+        return;
+    }
+
     const updatedCourse = {
         coursePrefix: document.getElementById("coursePrefix").value,
         courseName: document.getElementById("courseName").value,
         description: document.getElementById("description").value,
-        numberOfCredits: document.getElementById("numberOfCredits").value,
+        numberOfCredits: Number(document.getElementById("numberOfCredits").value),
     };
-
-    const token = localStorage.getItem("token");
 
     const res = await fetch(`http://localhost:3000/api/courses/${courseId}`, {
         method: "PUT",
@@ -47,6 +56,7 @@ document.getElementById("edit-course-form").addEventListener("submit", async (e)
         alert("Course updated!");
         window.location.href = "index.html";
     } else {
-        alert("Update failed");
+        const data = await res.json();
+        alert(data.error || "Update failed");
     }
 });

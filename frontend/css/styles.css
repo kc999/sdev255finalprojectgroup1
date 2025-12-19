@@ -72,6 +72,10 @@ nav h1 {
     justify-content: center;
 }
 
+.hover-bkgr i {
+    padding-right: 10px;
+}
+
 /* Popup Box */
 .hover-bkgr>div {
     background-color: #fff;
@@ -470,6 +474,11 @@ header, .loginTextH1 {
 
 .save-btn:hover {
     background-color: #425b5e;
+}
+
+#error {
+    text-align: center;
+    padding: 12px 15px;
 }
 
 /* Tablet (481px - 800px) */
