@@ -35,12 +35,15 @@ document.getElementById("edit-course-form").addEventListener("submit", async (e)
         alert("You must be logged in");
         return;
     }
-
+    const subjectAreaInput = document.getElementById("subjectArea").value;
+    const subjectAreaArray = subjectAreaInput.split(",").map(item => item.trim()).filter(item => item !== "");
     const updatedCourse = {
         coursePrefix: document.getElementById("coursePrefix").value,
         courseName: document.getElementById("courseName").value,
         description: document.getElementById("description").value,
+        subjectArea: subjectAreaArray,
         numberOfCredits: Number(document.getElementById("numberOfCredits").value),
+        
     };
 
     const res = await fetch(`http://localhost:3000/api/courses/${courseId}`, {

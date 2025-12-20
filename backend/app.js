@@ -69,9 +69,14 @@ router.put("/courses/:id", async(req,res) => {
     //First find the course that needs to be updated
     //Request id of course from request, and then find and update it
     try{
+        const authHeader = req.headers.authorization;
         //grabs encoded token from request
-        const token = req.body.token
+        const token = authHeader && authHeader.split(' ')[1]
         //decodes token using jwt-simple, which yields the original {username:x, role:y} format
+        if (!token)
+        {
+            return res.status(401).json({error: "Token Missing"});
+        }
         decoded = jwt.decode(token, secret).role
         if (decoded == "Teacher"){
             const course = req.body.course
